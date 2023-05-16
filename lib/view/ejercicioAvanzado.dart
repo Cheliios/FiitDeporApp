@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../controller/bottom_bar.dart';
 import 'components/drawer.dart';
 import 'deportes_page.dart';
 import 'nutricion_page.dart';
-import 'package:fitdepor_app/controller/bottom_bar.dart';
 
 void main() {
-  runApp(const PrincipiantePage());
+  runApp(const AvanzadoPage());
 }
 
-class PrincipiantePage extends StatelessWidget {
-  const PrincipiantePage({super.key});
+class AvanzadoPage extends StatelessWidget {
+  const AvanzadoPage({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: PrincipianteScreen(),
+      home: AvanzadoScreen(),
       theme: ThemeData(
           fontFamily: "Urbanist",
       ),
@@ -24,16 +24,16 @@ class PrincipiantePage extends StatelessWidget {
   }
 }
 
-class PrincipianteScreen extends StatefulWidget {
-  const PrincipianteScreen({super.key});
+class AvanzadoScreen extends StatefulWidget {
+  const AvanzadoScreen({super.key});
 
   @override
-  State<PrincipianteScreen> createState() => _PrincipianteScreen();
+  State<AvanzadoScreen> createState() => _AvanzadoScreen();
 }
 
 
-class _PrincipianteScreen extends State<PrincipianteScreen> {
-
+class _AvanzadoScreen extends State<AvanzadoScreen> {
+  
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -47,8 +47,9 @@ class _PrincipianteScreen extends State<PrincipianteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
         appBar: AppBar(
-          title: Text("Ejercicios Nivel Principiante"),
+          title: Text("Ejercicios Nivel Avanzado"),
           backgroundColor: Color.fromARGB(255, 19, 19, 19),
         ),
         drawer: DrawerCustom(),
@@ -93,8 +94,6 @@ class _PrincipianteScreen extends State<PrincipianteScreen> {
             fontSize: 15,
           ),
       ),
-
-      
     );
   }
 }

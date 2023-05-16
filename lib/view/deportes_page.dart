@@ -1,8 +1,9 @@
 import 'package:fitdepor_app/view/components/drawer.dart';
-import 'package:fitdepor_app/view/home_page.dart';
-import 'package:fitdepor_app/view/nutricion_page.dart';
+// import 'package:fitdepor_app/view/home_page.dart';
+// import 'package:fitdepor_app/view/nutricion_page.dart';
+import 'package:fitdepor_app/controller/bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 void main () => runApp(DeportesPage());
 
@@ -41,40 +42,7 @@ class _DeportesPages extends State<DeportesPages> {
       _selectedIndex = index;
     });
 
-    switch (index) {
-      case 0:
-       Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 500),
-            pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-        break;
-      case 1:
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 500),
-            pageBuilder: (context, animation, secondaryAnimation) => NutricionPage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-        break;
-    }
+    onItemTappedDeportes(context, index); // FUNCION BOTTOM_BAR
   }
 
   @override
@@ -161,7 +129,7 @@ class _DeportesPages extends State<DeportesPages> {
 
 
 
-                        Container(
+              Container(
               height: 400,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.5),
