@@ -140,7 +140,7 @@ class _DeportesPages extends State<DeportesPages> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Por la semifinal de ida, Real Madrid empató 1-1 con Manchester City',
+                      'Victoria 3-0 del cuadro neroazurro en el Derby della Madonnina y clasificación a la sexta final de la Champions League',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -150,14 +150,14 @@ class _DeportesPages extends State<DeportesPages> {
                   ),
                   SizedBox(height: 10),
                   Image.network(
-                    'https://storage.googleapis.com/fitsport-bucket/img-app/realmadrid_news.jpg',
+                    'https://storage.googleapis.com/fitsport-bucket/img-app/inter_finalchampions.jpg',
                     height: 200,
                   ),
                   SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'El Real Madrid empató 1-1 con el Manchester City este martes en la ida de semifinales de la Liga de Campeones en el Santiago Bernabéu dejando la eliminatoria abierta para la vuelta la próxima semana.',
+                      'Un Inter superior en los 180 minutos de la serie, se impuso esta vez 1 a 0 al Milan, con gol de su capitán Lautaro Martínez y asistencia de Romelu Lukaku.',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -181,7 +181,7 @@ class _DeportesPages extends State<DeportesPages> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Por la semifinal de ida, Real Madrid empató 1-1 con Manchester City',
+                      'Alianza Lima vs. FBC Melgar: se definió al árbitro que dirigirá partido clave en Arequipa',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -191,14 +191,14 @@ class _DeportesPages extends State<DeportesPages> {
                   ),
                   SizedBox(height: 10),
                   Image.network(
-                    'https://storage.googleapis.com/fitsport-bucket/img-app/realmadrid_news.jpg',
+                    'https://storage.googleapis.com/fitsport-bucket/img-app/Melgar_AL.jpg',
                     height: 200,
                   ),
                   SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'El Real Madrid empató 1-1 con el Manchester City este martes en la ida de semifinales de la Liga de Campeones en el Santiago Bernabéu dejando la eliminatoria abierta para la vuelta la próxima semana.',
+                      'FBC Melgar recibe a Alianza Lima este viernes 19 de mayo desde las 18:30 horas en el estadio de la UNSA. El cuadro victoriano es líder del Torneo Apertura con 8 puntos de diferencias con su más cercano perseguidor que es Universitario (28).',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,

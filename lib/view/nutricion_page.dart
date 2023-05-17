@@ -104,34 +104,37 @@ class _NutricionPages extends State<NutricionPages> {
                     ),
                     Positioned.fill(
                       child: Container(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Color.fromARGB(255, 163, 213, 219).withOpacity(0.9),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Título 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Beneficios del aguacate',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Información 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                            SizedBox(height: 10),
+                            Text(
+                              'El aguacate es rico en grasas saludables, fibra y nutrientes como la vitamina E, C y potasio.',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -151,34 +154,37 @@ class _NutricionPages extends State<NutricionPages> {
                     ),
                     Positioned.fill(
                       child: Container(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Color.fromARGB(255, 157, 212, 158).withOpacity(0.9),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Título 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Beneficios de la manzana',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize:16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Información 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                            SizedBox(height: 10),
+                            Text(
+                              'La manzana es una fruta rica en fibra y antioxidantes que ayuda a mejorar la digestión, mantener el corazón sano y prevenir enfermedades como la diabetes.',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -205,34 +211,37 @@ class _NutricionPages extends State<NutricionPages> {
                     ),
                     Positioned.fill(
                       child: Container(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Color.fromARGB(255, 214, 214, 122).withOpacity(0.9),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Título 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Beneficios del té verde',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Información 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                            SizedBox(height: 10),
+                            Text(
+                              'El té verde es rico en antioxidantes y compuestos bioactivos que pueden mejorar la función cerebral.',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -253,34 +262,37 @@ class _NutricionPages extends State<NutricionPages> {
                     ),
                     Positioned.fill(
                       child: Container(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Color.fromARGB(255, 223, 154, 154).withOpacity(0.9),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Título 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Positioned(
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Beneficios de la vitamina C',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Información 1',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
+                            SizedBox(height: 10),
+                            Text(
+                              'La vitamina C es un nutriente esencial que tiene numerosos beneficios para la salud, como mejorar la función inmunológica,',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],

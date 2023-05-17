@@ -1,3 +1,4 @@
+import 'package:fitdepor_app/view/about_us.dart';
 import 'package:fitdepor_app/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -102,10 +103,19 @@ class _DrawerCustom extends State<DrawerCustom> {
                     title: Text("Nosotros", style: TextStyle(fontSize: 20, color: Colors.white),),
                     leading: Icon(Icons.group, color: Colors.white,),
                     onTap: (){
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => MyApp())
-                      // );
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          transitionDuration: Duration(milliseconds: 500),
+                          pageBuilder: (context, animation, secondaryAnimation) => Nosotros(),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            return FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -127,7 +137,7 @@ class _DrawerCustom extends State<DrawerCustom> {
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text("Queríamos agradecerles por utilizar nuestra primera aplicación desarrollada en Flutter, una calculadora. Apreciamos su confianza al elegir nuestra aplicación y esperamos que les haya gustado y les haya sido útil.", style: TextStyle(color: Colors.white,fontSize: 18),),
+                                Text("Agradecemos tu apoyo a nuestra aplicación. Ten en cuenta que actualmente se trata solo de una maqueta, pero estamos trabajando arduamente para agregar más funcionalidades y contenido en el futuro. ¡Gracias por formar parte de nuestro viaje hacia una aplicación aún mejor! 🤩", style: TextStyle(color: Colors.white,fontSize: 18),),
 
                               ],
                             ),
