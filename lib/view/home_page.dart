@@ -1,9 +1,13 @@
 import 'package:fitdepor_app/view/components/drawer.dart';
-import 'package:fitdepor_app/view/deportes_page.dart';
-import 'package:fitdepor_app/view/nutricion_page.dart';
+// import 'package:fitdepor_app/view/deportes_page.dart';
+import 'package:fitdepor_app/view/ejercicioAvanzado.dart';
+import 'package:fitdepor_app/view/ejercicioIntermedio.dart';
+import 'package:fitdepor_app/view/ejercicioPrincipiante.dart';
+// import 'package:fitdepor_app/view/nutricion_page.dart';
+import 'package:fitdepor_app/controller/bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:ui';
+// import 'package:flutter/services.dart';
+
 void main () => runApp(HomePage());
 
 class HomePage extends StatelessWidget {
@@ -41,41 +45,7 @@ class _MainPage extends State<MainPage> {
       _selectedIndex = index;
     });
 
-    switch (index) {
-      case 0:
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 500),
-            pageBuilder: (context, animation, secondaryAnimation) => DeportesPage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 500),
-            pageBuilder: (context, animation, secondaryAnimation) => NutricionPage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-        break;
-    }
-
+    onItemTappedPrincipal(context, index); // FUNCION BOTTOM_BAR
   }
 
   @override
@@ -178,7 +148,22 @@ class _MainPage extends State<MainPage> {
                     right: 20,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Aquí puedes colocar la acción que deseas realizar al presionar el botón
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 500),
+                            pageBuilder: (context, animation, secondaryAnimation) => PrincipianteScreen(),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: Offset(1.0, 0.0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
                       },
                       child: Text(
                         'Botón',
@@ -260,7 +245,22 @@ class _MainPage extends State<MainPage> {
                     right: 20,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Aquí puedes colocar la acción que deseas realizar al presionar el botón
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 500),
+                            pageBuilder: (context, animation, secondaryAnimation) => IntermedioPage(),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: Offset(1.0, 0.0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
                       },
                       child: Text(
                         'Botón',
@@ -341,7 +341,22 @@ class _MainPage extends State<MainPage> {
                     right: 20,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Aquí puedes colocar la acción que deseas realizar al presionar el botón
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 500),
+                            pageBuilder: (context, animation, secondaryAnimation) => AvanzadoPage(),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: Offset(1.0, 0.0),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
                       },
                       child: Text(
                         'Botón',
@@ -406,7 +421,6 @@ class _MainPage extends State<MainPage> {
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),
-          
       ),
 
 

@@ -1,8 +1,10 @@
 import 'package:fitdepor_app/view/components/drawer.dart';
-import 'package:fitdepor_app/view/deportes_page.dart';
-import 'package:fitdepor_app/view/home_page.dart';
+// import 'package:fitdepor_app/view/deportes_page.dart';
+// import 'package:fitdepor_app/view/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
+
+import '../controller/bottom_bar.dart';
 
 void main () => runApp(NutricionPage());
 
@@ -41,40 +43,7 @@ class _NutricionPages extends State<NutricionPages> {
       _selectedIndex = index;
     });
 
-    switch (index) {
-      case 0:
-       Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 500),
-            pageBuilder: (context, animation, secondaryAnimation) => HomePage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            transitionDuration: Duration(milliseconds: 500),
-            pageBuilder: (context, animation, secondaryAnimation) => DeportesPage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-        );
-        break;
-      case 2:
-        break;
-    }
+    onItemTappedNutricion(context, index); // FUNCION BOTTOM_BAR
   }
 
   @override
