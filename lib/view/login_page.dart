@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fitdepor_app/view/home_page.dart';
 import 'package:fitdepor_app/view/registro_usuario.dart';
+// import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   final String? usuario;
@@ -16,6 +17,9 @@ class _LoginState extends State<Login> {
   TextEditingController _usuarioController = TextEditingController();
   TextEditingController _contrasenaController = TextEditingController();
 
+  // final TextEditingController _nicknameController = TextEditingController();
+  // final TextEditingController _passwordController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +34,28 @@ class _LoginState extends State<Login> {
     _contrasenaController.dispose();
     super.dispose();
   }
+
+  // Future<void> _login() async {
+  //   final url = 'https://fitdeporregisterloginprueba2-dot-thinking-creek-385613.uc.r.appspot.com/login'; 
+
+  //   final response = await http.post(
+  //     Uri.parse(url),
+  //     body: {
+  //       'user_nickname': _nicknameController.text,
+  //       'user_password': _passwordController.text,
+  //     },
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     // Login exitoso
+  //     print('Login exitoso');
+  //   } else {
+  //     // Error en el login
+  //     print('Error en el login');
+  //   }
+  // }
+
+
 
   @override
   Widget build(BuildContext context) {

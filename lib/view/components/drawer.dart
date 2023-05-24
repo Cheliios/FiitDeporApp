@@ -78,8 +78,7 @@ class _DrawerCustom extends State<DrawerCustom> {
                     context,
                     PageRouteBuilder(
                       transitionDuration: Duration(milliseconds: 500),
-                      pageBuilder: (context, animation, secondaryAnimation) =>
-                          MainPage(),
+                      pageBuilder: (context, animation, secondaryAnimation) => MainPage(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         return FadeTransition(
