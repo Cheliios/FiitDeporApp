@@ -9,6 +9,7 @@ class RegistroUsuario extends StatefulWidget {
 }
 
 class _RegistroUsuarioState extends State<RegistroUsuario> {
+  String dni = "";
   String usuario = '';
   String contrasena = '';
   String nombre = '';
@@ -90,6 +91,7 @@ class _RegistroUsuarioState extends State<RegistroUsuario> {
   }
 
   
+final TextEditingController _dniController = TextEditingController();
 final TextEditingController _nicknameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 final TextEditingController _nameController = TextEditingController();
@@ -101,11 +103,12 @@ final TextEditingController _mailController = TextEditingController();
 
 
   Future<void> _register() async {
-    final url = 'https://fitdeporregisterloginprueba3-dot-thinking-creek-385613.uc.r.appspot.com/register'; // Reemplaza con la URL de tu aplicación Flask
+    final url = 'https://fitdeporregisterloginprueba8-dot-thinking-creek-385613.uc.r.appspot.com/register'; // Reemplaza con la URL de tu aplicación Flask
 
     final response = await http.post(
       Uri.parse(url),
       body: {
+        'user_dni': _dniController.text,
         'user_nickname': _nicknameController.text,
         'user_password': _passwordController.text,
         'user_name': _nameController.text,
@@ -144,6 +147,28 @@ final TextEditingController _mailController = TextEditingController();
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+                  TextFormField(
+                    controller: _dniController,
+                    decoration: InputDecoration(
+                      labelText: 'DNI',
+                      labelStyle: TextStyle(
+                        color: Color.fromARGB(
+                            255, 175, 78, 78), // Cambia aquí el color del texto
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                        color: Color.fromARGB(255, 175, 78, 78),
+                      ) // Cambia aquí el color de la línea
+                          ),
+                    ),
+                    cursorColor: Color.fromARGB(255, 175, 78, 78),
+                    onSaved: (value) => dni =
+                        value!, // Guardar el valor de la contraseña
+                  ),
+
+
+
                   TextFormField(
                     controller: _nicknameController,
                     decoration: InputDecoration(
@@ -164,6 +189,8 @@ final TextEditingController _mailController = TextEditingController();
 
 
                   SizedBox(height: 16.0),
+
+
 
 
                   TextFormField(
