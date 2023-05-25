@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fitdepor_app/view/home_page.dart';
 import 'package:fitdepor_app/view/registro_usuario.dart';
-// import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   final String? usuario;
@@ -17,8 +17,10 @@ class _LoginState extends State<Login> {
   TextEditingController _usuarioController = TextEditingController();
   TextEditingController _contrasenaController = TextEditingController();
 
-  // final TextEditingController _nicknameController = TextEditingController();
-  // final TextEditingController _passwordController = TextEditingController();
+
+  //USADO PARA LOGIN _ 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -35,26 +37,25 @@ class _LoginState extends State<Login> {
     super.dispose();
   }
 
-  // Future<void> _login() async {
-  //   final url = 'https://fitdeporregisterloginprueba2-dot-thinking-creek-385613.uc.r.appspot.com/login'; 
+  Future<void> login() async {
+    final url = 'https://fitdeporregisterloginprueba9-dot-thinking-creek-385613.uc.r.appspot.com/login';
 
-  //   final response = await http.post(
-  //     Uri.parse(url),
-  //     body: {
-  //       'user_nickname': _nicknameController.text,
-  //       'user_password': _passwordController.text,
-  //     },
-  //   );
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'user_mail': _emailController.text,
+        'user_password': _passwordController.text,
+      },
+    );
 
-  //   if (response.statusCode == 200) {
-  //     // Login exitoso
-  //     print('Login exitoso');
-  //   } else {
-  //     // Error en el login
-  //     print('Error en el login');
-  //   }
-  // }
-
+    if (response.statusCode == 200) {
+      // Login exitoso
+      print('Login exitoso');
+    } else {
+      // Error en el login
+      print('Error en el login');
+    }
+  }
 
 
   @override
@@ -79,8 +80,9 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextFormField(
+                    controller: _emailController,
                     decoration: InputDecoration(
-                      labelText: 'Usuario',
+                      labelText: 'Correo Electronico',
                       labelStyle: TextStyle(
                         color: Color.fromARGB(
                             255, 175, 78, 78), // Cambia aquí el color del texto
@@ -93,10 +95,13 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
-                    controller: _usuarioController,
+
                   ),
+
+
                   SizedBox(height: 16.0),
                   TextFormField(
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
                       labelStyle: TextStyle(
@@ -112,81 +117,84 @@ class _LoginState extends State<Login> {
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
                     obscureText: true,
-                    controller: _contrasenaController,
                   ),
+
+
                   SizedBox(height: 16.0),
+
+
                   ElevatedButton(
                     onPressed: () {
-                      String usuario = _usuarioController.text;
-                      String contrasena = _contrasenaController.text;
-                      if (usuario.isNotEmpty && contrasena.isNotEmpty) {
-                        if (usuario == widget.usuario &&
-                            contrasena == widget.contrasena) {
-                          // Inicio de sesión exitoso
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Inicio de sesión exitoso'),
-                                content: Text('¡Bienvenido, $usuario!'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()),
-                                      );
-                                    },
-                                    child: Text('Aceptar'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          // Error de inicio de sesión
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Error de inicio de sesión'),
-                                content:
-                                    Text('Usuario o contraseña incorrectos'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Aceptar'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      } else {
-                        // Campos vacíos
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('Campos vacíos'),
-                              content: Text(
-                                  'Por favor, ingrese usuario y contraseña'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text('Aceptar'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
+                      // String usuario = _usuarioController.text;
+                      // String contrasena = _contrasenaController.text;
+                      // if (usuario.isNotEmpty && contrasena.isNotEmpty) {
+                      //   if (usuario == widget.usuario &&
+                      //       contrasena == widget.contrasena) {
+                      //     // Inicio de sesión exitoso
+                      //     showDialog(
+                      //       context: context,
+                      //       builder: (BuildContext context) {
+                      //         return AlertDialog(
+                      //           title: Text('Inicio de sesión exitoso'),
+                      //           content: Text('¡Bienvenido, $usuario!'),
+                      //           actions: [
+                      //             TextButton(
+                      //               onPressed: () {
+                      //                 Navigator.pop(context);
+                      //                 Navigator.push(
+                      //                   context,
+                      //                   MaterialPageRoute(
+                      //                       builder: (context) => HomePage()),
+                      //                 );
+                      //               },
+                      //               child: Text('Aceptar'),
+                      //             ),
+                      //           ],
+                      //         );
+                      //       },
+                      //     );
+                      //   } else {
+                      //     // Error de inicio de sesión
+                      //     showDialog(
+                      //       context: context,
+                      //       builder: (BuildContext context) {
+                      //         return AlertDialog(
+                      //           title: Text('Error de inicio de sesión'),
+                      //           content:
+                      //               Text('Usuario o contraseña incorrectos'),
+                      //           actions: [
+                      //             TextButton(
+                      //               onPressed: () {
+                      //                 Navigator.pop(context);
+                      //               },
+                      //               child: Text('Aceptar'),
+                      //             ),
+                      //           ],
+                      //         );
+                      //       },
+                      //     );
+                      //   }
+                      // } else {
+                      //   // Campos vacíos
+                      //   showDialog(
+                      //     context: context,
+                      //     builder: (BuildContext context) {
+                      //       return AlertDialog(
+                      //         title: Text('Campos vacíos'),
+                      //         content: Text(
+                      //             'Por favor, ingrese usuario y contraseña'),
+                      //         actions: [
+                      //           TextButton(
+                      //             onPressed: () {
+                      //               Navigator.pop(context);
+                      //             },
+                      //             child: Text('Aceptar'),
+                      //           ),
+                      //         ],
+                      //       );
+                      //     },
+                      //   );
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(
