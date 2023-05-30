@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Main Page',
-      home: Login(usuario: '', contrasena: ''),
+      home: LoginPages()
     );
   }
 }

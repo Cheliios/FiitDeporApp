@@ -78,7 +78,7 @@ class _RegistroUsuarioState extends State<RegistroUsuario> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        Login(usuario: usuario, contrasena: contrasena),
+                        LoginPages()
                   ),
                 );
               },

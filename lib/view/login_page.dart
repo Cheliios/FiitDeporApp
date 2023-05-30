@@ -1,69 +1,144 @@
-import 'package:flutter/material.dart';
-import 'package:fitdepor_app/view/home_page.dart';
+import 'dart:math';
+
 import 'package:fitdepor_app/view/registro_usuario.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'home_page.dart';
+import 'dart:convert';
+
+import 'package:fitdepor_app/models/user_model.dart';
+import 'package:fitdepor_app/controller/auth_controller.dart';
 import 'package:http/http.dart' as http;
 
-class Login extends StatefulWidget {
-  final String? usuario;
-  final String? contrasena;
+void main () => runApp(LoginPage());
 
-  Login({this.usuario, this.contrasena});
-
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  TextEditingController _usuarioController = TextEditingController();
-  TextEditingController _contrasenaController = TextEditingController();
-
-
-  //USADO PARA LOGIN _ 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.usuario != null) {
-      _usuarioController.text = widget.usuario!;
-    }
-  }
-
-  @override
-  void dispose() {
-    _usuarioController.dispose();
-    _contrasenaController.dispose();
-    super.dispose();
-  }
-
-  Future<void> login() async {
-    final url = 'https://fitdeporregisterloginprueba9-dot-thinking-creek-385613.uc.r.appspot.com/login';
-
-    final response = await http.post(
-      Uri.parse(url),
-      body: {
-        'user_mail': _emailController.text,
-        'user_password': _passwordController.text,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      // Login exitoso
-      print('Login exitoso');
-    } else {
-      // Error en el login
-      print('Error en el login');
-    }
-  }
-
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+      return MaterialApp(
+        home: LoginPages(),
+        theme: ThemeData(
+          fontFamily: "Urbanist",
+        ),
+      );
+  }
+}
+
+class LoginPages extends StatefulWidget {
+  const LoginPages({super.key});
+
+  @override
+  State<LoginPages> createState() => _LoginPages();
+}
+
+
+// _______________________________________________
+
+
+class _LoginPages extends State<LoginPages> {
+  
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  String errorMessage = '';
+
+  Future<void> login() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Por favor, ingresa tu email y contraseña.'),
+            actions: [
+              TextButton(
+                child: Text('Aceptar'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    // Realizar la solicitud POST al backend
+    var url = 'https://fitdeporregisterloginprueba9-dot-thinking-creek-385613.uc.r.appspot.com/login';
+    var response = await http.post(
+      Uri.parse(url),
+      body: {
+        'user_mail': email,
+        'user_password': password,
+      },
+    );
+print('Response: ${response.body}');
+    if (response.statusCode == 200) {
+      // Verificar la respuesta del backend
+      if (response.body == 'OK') {
+        // Iniciar sesión exitoso, redirigir a otra página
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => HomePage(),
+          ),
+        );
+      } else {
+        // Usuario no encontrado o contraseña incorrecta
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Contraseña o correo equivocado.'),
+              actions: [
+                TextButton(
+                  child: Text('Aceptar'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } else {
+      // Error en la solicitud al backend
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Error al realizar la solicitud.'),
+            actions: [
+              TextButton(
+                child: Text('Aceptar'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    
     return Scaffold(
+      
       appBar: AppBar(
         title: Text('Inicio de Sesión'),
-        backgroundColor: Color.fromARGB(255, 175, 78, 78),
+        backgroundColor: Color.fromARGB(255, 94, 175, 78),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -79,8 +154,10 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
+
                   TextFormField(
-                    controller: _emailController,
+                    controller: emailController,
                     decoration: InputDecoration(
                       labelText: 'Correo Electronico',
                       labelStyle: TextStyle(
@@ -95,13 +172,14 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
-
                   ),
 
 
                   SizedBox(height: 16.0),
+
+
                   TextFormField(
-                    controller: _passwordController,
+                    controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
                       labelStyle: TextStyle(
@@ -124,78 +202,7 @@ class _LoginState extends State<Login> {
 
 
                   ElevatedButton(
-                    onPressed: () {
-                      // String usuario = _usuarioController.text;
-                      // String contrasena = _contrasenaController.text;
-                      // if (usuario.isNotEmpty && contrasena.isNotEmpty) {
-                      //   if (usuario == widget.usuario &&
-                      //       contrasena == widget.contrasena) {
-                      //     // Inicio de sesión exitoso
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (BuildContext context) {
-                      //         return AlertDialog(
-                      //           title: Text('Inicio de sesión exitoso'),
-                      //           content: Text('¡Bienvenido, $usuario!'),
-                      //           actions: [
-                      //             TextButton(
-                      //               onPressed: () {
-                      //                 Navigator.pop(context);
-                      //                 Navigator.push(
-                      //                   context,
-                      //                   MaterialPageRoute(
-                      //                       builder: (context) => HomePage()),
-                      //                 );
-                      //               },
-                      //               child: Text('Aceptar'),
-                      //             ),
-                      //           ],
-                      //         );
-                      //       },
-                      //     );
-                      //   } else {
-                      //     // Error de inicio de sesión
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (BuildContext context) {
-                      //         return AlertDialog(
-                      //           title: Text('Error de inicio de sesión'),
-                      //           content:
-                      //               Text('Usuario o contraseña incorrectos'),
-                      //           actions: [
-                      //             TextButton(
-                      //               onPressed: () {
-                      //                 Navigator.pop(context);
-                      //               },
-                      //               child: Text('Aceptar'),
-                      //             ),
-                      //           ],
-                      //         );
-                      //       },
-                      //     );
-                      //   }
-                      // } else {
-                      //   // Campos vacíos
-                      //   showDialog(
-                      //     context: context,
-                      //     builder: (BuildContext context) {
-                      //       return AlertDialog(
-                      //         title: Text('Campos vacíos'),
-                      //         content: Text(
-                      //             'Por favor, ingrese usuario y contraseña'),
-                      //         actions: [
-                      //           TextButton(
-                      //             onPressed: () {
-                      //               Navigator.pop(context);
-                      //             },
-                      //             child: Text('Aceptar'),
-                      //           ),
-                      //         ],
-                      //       );
-                      //     },
-                      //   );
-                      // }
-                    },
+                    onPressed: login,
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(
                             255, 175, 78, 78) // Cambia aquí el color del botón
