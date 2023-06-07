@@ -8,16 +8,18 @@ import 'package:fitdepor_app/controller/bottom_bar.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
-void main () => runApp(HomePage());
+void main () => runApp(HomePage(userMail: '',));
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+
+  final String userMail;
+  const HomePage({super.key, required this.userMail});
 
   @override
   Widget build(BuildContext context) {
 
       return MaterialApp(
-        home: MainPage(),
+      home: MainPage(userMail: userMail),
         theme: ThemeData(
           fontFamily: "Urbanist",
         ),
@@ -26,7 +28,8 @@ class HomePage extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final String userMail;
+  const MainPage({super.key,required this.userMail});
 
   @override
   State<MainPage> createState() => _MainPage();
@@ -66,7 +69,7 @@ class _MainPage extends State<MainPage> {
               children: [
                 SizedBox(height: 30),
                 Text(
-                  "Bienvenido a:",
+                'Bienvenido: ${widget.userMail}',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],

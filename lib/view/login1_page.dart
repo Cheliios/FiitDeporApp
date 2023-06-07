@@ -4,8 +4,8 @@ import 'package:fitdepor_app/view/registro_usuario.dart';
 import 'package:http/http.dart' as http;
 
 //IMPORTE PARA API - LOGIN
-import 'package:fitdepor_app/models/user_model.dart';
-import 'package:fitdepor_app/controller/auth_controller.dart';
+// import 'package:fitdepor_app/models/user_model.dart';
+// import 'package:fitdepor_app/controller/auth_controller.dart';
 
 
 
@@ -235,7 +235,7 @@ class _LoginState extends State<Login> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => HomePage(userMail: '',)),
                       );
                       // Lógica para continuar sin iniciar sesión
                     },

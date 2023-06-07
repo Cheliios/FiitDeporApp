@@ -51,6 +51,7 @@ class _PrincipianteScreen extends State<PrincipianteScreen> {
           title: Text("Ejercicios Nivel Principiante"),
           backgroundColor: Color.fromARGB(255, 19, 19, 19),
         ),
+        
         drawer: DrawerCustom(),
 
         backgroundColor: Color.fromARGB(255, 44, 44, 44),

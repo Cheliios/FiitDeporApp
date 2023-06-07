@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fitdepor_app/view/home_page.dart';
 import 'package:fitdepor_app/view/login_page.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
+import 'package:fitdepor_app/controller/register_controller.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class RegistroUsuario extends StatefulWidget {
   @override
@@ -9,88 +12,10 @@ class RegistroUsuario extends StatefulWidget {
 }
 
 class _RegistroUsuarioState extends State<RegistroUsuario> {
-  String dni = "";
-  String usuario = '';
-  String contrasena = '';
-  String nombre = '';
-  String apellidos = '';
-  int edad = 0;
-  String genero = '';
-  String pais = '';
-  String correo = '';
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      _showSuccessDialog();
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text('Por favor, completa los campos de usuario y contraseña')),
-      );
-    }
-  }
+final RegisterController _registroController = RegisterController();
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content: Text(message),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Cerrar el cuadro de diálogo de error
-              },
-              child: Text('Aceptar'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _showSuccessDialog() {
-    if (usuario.isEmpty || contrasena.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content:
-                Text('Por favor, completa los campos de usuario y contraseña')),
-      );
-      return;
-    }
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Registro exitoso'),
-          content: Text('Se ha registrado con éxito'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Cerrar el cuadro de diálogo
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        LoginPages()
-                  ),
-                );
-              },
-              child: Text('Aceptar'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  
 final TextEditingController _dniController = TextEditingController();
 final TextEditingController _nicknameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
@@ -101,31 +26,93 @@ final TextEditingController _generoController = TextEditingController();
 final TextEditingController _paisController = TextEditingController();
 final TextEditingController _mailController = TextEditingController();
 
+  //Variable par validar el formulario
+  final _formKey = GlobalKey<FormState>();
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
 
   Future<void> _register() async {
-    final url = 'https://fitdeporregisterloginprueba9-dot-thinking-creek-385613.uc.r.appspot.com/register'; // Reemplaza con la URL de tu aplicación Flask
+    if (_formKey.currentState!.validate()) {
+      if (_generoController.text.isEmpty) {
+        _showSnackBar('Falta seleccionar el género');
+        return;
+      }
 
-    final response = await http.post(
-      Uri.parse(url),
-      body: {
-        'user_dni': _dniController.text,
-        'user_nickname': _nicknameController.text,
-        'user_password': _passwordController.text,
-        'user_name': _nameController.text,
-        'user_lastname': _lastnameController.text,
-        'user_edad': _edadController.text,
-        'user_genero': _generoController.text,
-        'user_pais': _paisController.text,
-        'user_mail': _mailController.text,
-      },
-    );
+      final registrationResult = await _registroController.registerUser(
+        _dniController.text,
+        _nicknameController.text,
+        _passwordController.text,
+        _nameController.text,
+        _lastnameController.text,
+        _edadController.text,
+        _generoController.text,
+        _paisController.text,
+        _mailController.text,
+      );
 
-    if (response.statusCode == 200) {
-      // Registro exitoso
-      print('Registro exitoso');
+      if (registrationResult == 'OK') {
+        // Mostrar mensaje de éxito
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Dialog(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset('assets/img/corazon.gif'),
+                    SizedBox(height: 20),
+                    AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText(
+                          'Registro exitoso',
+                          textStyle: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          speed: Duration(milliseconds: 100),
+                        ),
+                      ],
+                      totalRepeatCount: 1,
+                      pause: Duration(seconds: 2),
+                      displayFullTextOnTap: true,
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context); // Cerrar el diálogo
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                      ),
+                      child: Text('Ir a iniciar sesión'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+      
+      } else {
+        // Mostrar mensaje de error
+        _showSnackBar('Una cuenta ya se encuentra registrada con este DNI');
+      }
     } else {
-      // Error en el registro
-      print('Error en el registro');
+      _showSnackBar('Falta completar campos obligatorios');
     }
   }
 
@@ -163,8 +150,15 @@ final TextEditingController _mailController = TextEditingController();
                           ),
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
-                    onSaved: (value) => dni =
-                        value!, // Guardar el valor de la contraseña
+
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu DNI';
+                      }
+                      return null;
+                  },
+                    
+                    // onSaved: (value) => dni = value!, // Guardar el valor de la contraseña
                   ),
 
 
@@ -184,7 +178,13 @@ final TextEditingController _mailController = TextEditingController();
                           ),
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
-                    onSaved: (value) => usuario = value!,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Usuario';
+                      }
+                      return null;
+                  },
+                    // onSaved: (value) => usuario = value!,
                   ),
 
 
@@ -210,8 +210,13 @@ final TextEditingController _mailController = TextEditingController();
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
 
                     obscureText: true,
-                    onSaved: (value) => contrasena =
-                        value!, // Guardar el valor de la contraseña
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Contraseña';
+                      }
+                      return null;
+                  },
+                    // onSaved: (value) => contrasena = value!, // Guardar el valor de la contraseña
                   ),
 
 
@@ -233,8 +238,15 @@ final TextEditingController _mailController = TextEditingController();
                           ),
                     ),
                     cursorColor: Color.fromARGB(
-                        255, 175, 78, 78), // Cambia aquí el color del cursor
-                    onSaved: (value) => nombre = value!,
+                        255, 175, 78, 78), 
+
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Nombre';
+                      }
+                      return null;
+                  },// Cambia aquí el color del cursor
+                    // onSaved: (value) => nombre = value!,
                   ),
 
 
@@ -256,7 +268,13 @@ final TextEditingController _mailController = TextEditingController();
                           ),
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
-                    onSaved: (value) => apellidos = value!,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Apellido';
+                      }
+                      return null;
+                  },
+                    // onSaved: (value) => apellidos = value!,
                   ),
 
 
@@ -281,9 +299,17 @@ final TextEditingController _mailController = TextEditingController();
                     cursorColor: Color.fromARGB(
                         255, 175, 78, 78), // Cambia aquí el color del cursor
                     keyboardType: TextInputType.number,
-                    onSaved: (value) => edad = int.parse(value!),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Edad';
+                      }
+                      return null;
+                  },
+                    // onSaved: (value) => edad = int.parse(value!),
                   ),
+
                   SizedBox(height: 16.0),
+
                   Text(
                     'Género',
                     style: TextStyle(
@@ -353,7 +379,14 @@ final TextEditingController _mailController = TextEditingController();
                           ),
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
-                    onSaved: (value) => pais = value!,
+                    
+                       validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Pais';
+                      }
+                      return null;
+                  },
+                    // onSaved: (value) => pais = value!,
                   ),
 
 
@@ -376,19 +409,28 @@ final TextEditingController _mailController = TextEditingController();
                     ),
                     cursorColor: Color.fromARGB(255, 175, 78, 78),
                     keyboardType: TextInputType.emailAddress,
-                    onSaved: (value) => correo = value!,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Por favor, ingresa tu Correo Electronico';
+                      }
+                      return null;
+                  },
+                    // onSaved: (value) => correo = value!,
                   ),
+
                   SizedBox(height: 16.0),
+
                   ElevatedButton(
                     onPressed: _register,
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromARGB(255, 175, 78,
                           78), // Cambia aquí el color de fondo del botón
                     ),
-                    child: Text('Siguiente'),
+                    child: Text('Registrarse'),
                   ),
                 ],
               )),
+              
         ),
       ),
     );

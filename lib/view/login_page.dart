@@ -1,14 +1,12 @@
-import 'dart:math';
-
 import 'package:fitdepor_app/view/registro_usuario.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'home_page.dart';
-import 'dart:convert';
 
-import 'package:fitdepor_app/models/user_model.dart';
-import 'package:fitdepor_app/controller/auth_controller.dart';
-import 'package:http/http.dart' as http;
+import 'home_page.dart';
+import '../controller/login_controller.dart';
+
+// import 'package:sqflite/sqflite.dart';
+// import 'package:path/path.dart';
+// 
 
 void main () => runApp(LoginPage());
 
@@ -34,103 +32,19 @@ class LoginPages extends StatefulWidget {
   State<LoginPages> createState() => _LoginPages();
 }
 
+// _______________________________________________
+
 
 // _______________________________________________
 
 
 class _LoginPages extends State<LoginPages> {
   
+  LoginController loginController = LoginController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  String errorMessage = '';
-
-  Future<void> login() async {
-    String email = emailController.text;
-    String password = passwordController.text;
-
-    if (email.isEmpty || password.isEmpty) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text('Por favor, ingresa tu email y contraseña.'),
-            actions: [
-              TextButton(
-                child: Text('Aceptar'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-      return;
-    }
-
-    // Realizar la solicitud POST al backend
-    var url = 'https://fitdeporregisterloginprueba9-dot-thinking-creek-385613.uc.r.appspot.com/login';
-    var response = await http.post(
-      Uri.parse(url),
-      body: {
-        'user_mail': email,
-        'user_password': password,
-      },
-    );
-print('Response: ${response.body}');
-    if (response.statusCode == 200) {
-      // Verificar la respuesta del backend
-      if (response.body == 'OK') {
-        // Iniciar sesión exitoso, redirigir a otra página
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => HomePage(),
-          ),
-        );
-      } else {
-        // Usuario no encontrado o contraseña incorrecta
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Error'),
-              content: Text('Contraseña o correo equivocado.'),
-              actions: [
-                TextButton(
-                  child: Text('Aceptar'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } else {
-      // Error en la solicitud al backend
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text('Error al realizar la solicitud.'),
-            actions: [
-              TextButton(
-                child: Text('Aceptar'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
-
+  String userEmail = '';
+  
   @override
   Widget build(BuildContext context) {
     
@@ -202,7 +116,13 @@ print('Response: ${response.body}');
 
 
                   ElevatedButton(
-                    onPressed: login,
+                    onPressed: () {
+                      loginController.login(
+                        context,
+                        emailController.text,
+                        passwordController.text,
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(
                             255, 175, 78, 78) // Cambia aquí el color del botón
@@ -236,7 +156,7 @@ print('Response: ${response.body}');
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => HomePage(userMail: '',)),
                       );
                       // Lógica para continuar sin iniciar sesión
                     },

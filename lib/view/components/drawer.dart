@@ -3,6 +3,9 @@ import 'package:fitdepor_app/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../models/user_model.dart';
+import '../../models/user_singleton.dart';
+
 void main() => runApp(DrawerApp());
 
 class DrawerApp extends StatelessWidget {
@@ -29,8 +32,13 @@ class DrawerCustom extends StatefulWidget {
 // _______________________________________________
 
 class _DrawerCustom extends State<DrawerCustom> {
+
+
   @override
   Widget build(BuildContext context) {
+
+    String? userEmail = UserSingleton().getUserEmail(); // Obtener el correo electrónico del Singleton
+    
     return Drawer(
       child: Container(
         color: Color.fromARGB(255, 70, 79, 99),
@@ -41,10 +49,10 @@ class _DrawerCustom extends State<DrawerCustom> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Bienvenido: ",
+                  Text(
+                    "Bienvenido: $userEmail",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -78,7 +86,7 @@ class _DrawerCustom extends State<DrawerCustom> {
                     context,
                     PageRouteBuilder(
                       transitionDuration: Duration(milliseconds: 500),
-                      pageBuilder: (context, animation, secondaryAnimation) => MainPage(),
+                      pageBuilder: (context, animation, secondaryAnimation) => MainPage(userMail: '',),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         return FadeTransition(
