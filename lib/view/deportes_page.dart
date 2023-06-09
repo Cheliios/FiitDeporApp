@@ -47,6 +47,7 @@ class _DeportesPages extends State<DeportesPages> {
 
   @override
   Widget build(BuildContext context) {
+    
       return Scaffold(
 
         appBar: AppBar(
@@ -78,7 +79,7 @@ class _DeportesPages extends State<DeportesPages> {
                   SizedBox(width: 16),
                   Expanded(
                     child: Image.network(
-                      'https://storage.googleapis.com/fitsport-bucket/img-app/corriendo.png',
+                      'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_logo',
                       height: 100,
                     ),
                   ),
@@ -108,7 +109,7 @@ class _DeportesPages extends State<DeportesPages> {
                   ),
                   SizedBox(height: 10),
                   Image.network(
-                    'https://storage.googleapis.com/fitsport-bucket/img-app/realmadrid_news.jpg',
+                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia1',
                     height: 200,
                   ),
                   SizedBox(height: 10),
@@ -150,7 +151,7 @@ class _DeportesPages extends State<DeportesPages> {
                   ),
                   SizedBox(height: 10),
                   Image.network(
-                    'https://storage.googleapis.com/fitsport-bucket/img-app/inter_finalchampions.jpg',
+                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia2',
                     height: 200,
                   ),
                   SizedBox(height: 10),
@@ -191,7 +192,7 @@ class _DeportesPages extends State<DeportesPages> {
                   ),
                   SizedBox(height: 10),
                   Image.network(
-                    'https://storage.googleapis.com/fitsport-bucket/img-app/Melgar_AL.jpg',
+                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia3',
                     height: 200,
                   ),
                   SizedBox(height: 10),

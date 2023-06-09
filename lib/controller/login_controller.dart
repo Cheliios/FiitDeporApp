@@ -95,7 +95,7 @@ class LoginController {
                           Navigator.pop(context); // Cerrar el diálogo
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage(userMail: email)),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         },
                         style: ButtonStyle(

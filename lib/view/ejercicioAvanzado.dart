@@ -74,7 +74,7 @@ class _AvanzadoScreen extends State<AvanzadoScreen> {
                   SizedBox(width: 16),
                   Expanded(
                     child: Image.network(
-                      'https://storage.googleapis.com/fitsport-bucket/img-app/fuerza.png',
+                      'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_ejercicio_avanzado_logo',
                       height: 100,
                     ),
                   ),
@@ -94,7 +94,7 @@ class _AvanzadoScreen extends State<AvanzadoScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: Image.network(
-                      'https://storage.googleapis.com/fitsport-bucket/GIFS/pushup_gif.gif',
+                      'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/pages_ejercicio_img1',
                     ).image,
                     fit: BoxFit.cover,
                   ),
@@ -185,7 +185,7 @@ class _AvanzadoScreen extends State<AvanzadoScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: Image.network(
-                      'https://storage.googleapis.com/fitsport-bucket/GIFS/sentadillas_gif.gif',
+                      'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/pages_ejercicio_img2',
                     ).image,
                     fit: BoxFit.cover,
                   ),
@@ -275,7 +275,7 @@ class _AvanzadoScreen extends State<AvanzadoScreen> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: Image.network(
-                      'https://storage.googleapis.com/fitsport-bucket/GIFS/abdomen_gif.gif',
+                      'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/pages_ejercicio_img3',
                     ).image,
                     fit: BoxFit.cover,
                   ),

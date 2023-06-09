@@ -78,7 +78,7 @@ class _NutricionPages extends State<NutricionPages> {
                   SizedBox(width: 16),
                   Expanded(
                     child: Image.network(
-                      'https://storage.googleapis.com/fitsport-bucket/img-app/dieta.png',
+                      'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_nutricion_logo',
                       height: 100,
                     ),
                   ),
@@ -97,7 +97,7 @@ class _NutricionPages extends State<NutricionPages> {
                       height: 200,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage('https://storage.googleapis.com/fitsport-bucket/img-app/comida4.jpg'),
+                          image: NetworkImage('https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_nutricion_img1'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -147,7 +147,7 @@ class _NutricionPages extends State<NutricionPages> {
                       height: 200,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage('https://storage.googleapis.com/fitsport-bucket/img-app/comida2.jpg'),
+                          image: NetworkImage('https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_nutricion_img2'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -204,7 +204,7 @@ class _NutricionPages extends State<NutricionPages> {
                       height: 200,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage('https://storage.googleapis.com/fitsport-bucket/img-app/comida5.jpg'),
+                          image: NetworkImage('https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_nutricion_img3'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -255,7 +255,7 @@ class _NutricionPages extends State<NutricionPages> {
                       height: 200,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage('https://storage.googleapis.com/fitsport-bucket/img-app/comida3.jpg'),
+                          image: NetworkImage('https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_nutricion_img4'),
                           fit: BoxFit.cover,
                         ),
                       ),

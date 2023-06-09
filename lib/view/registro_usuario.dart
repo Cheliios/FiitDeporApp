@@ -3,7 +3,6 @@ import 'package:fitdepor_app/view/home_page.dart';
 import 'package:fitdepor_app/view/login_page.dart';
 // import 'package:http/http.dart' as http;
 import 'package:fitdepor_app/controller/register_controller.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class RegistroUsuario extends StatefulWidget {

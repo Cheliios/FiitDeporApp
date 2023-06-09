@@ -156,7 +156,7 @@ class _LoginPages extends State<LoginPages> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage(userMail: '',)),
+                        MaterialPageRoute(builder: (context) => HomePage()),
                       );
                       // Lógica para continuar sin iniciar sesión
                     },
