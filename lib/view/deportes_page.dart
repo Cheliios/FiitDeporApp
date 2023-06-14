@@ -1,9 +1,15 @@
+import 'dart:convert';
+
 import 'package:fitdepor_app/view/components/drawer.dart';
 // import 'package:fitdepor_app/view/home_page.dart';
 // import 'package:fitdepor_app/view/nutricion_page.dart';
 import 'package:fitdepor_app/controller/bottom_bar.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+
+import '../controller/nutricion_content_controller.dart';
+
 
 void main () => runApp(DeportesPage());
 
@@ -44,6 +50,71 @@ class _DeportesPages extends State<DeportesPages> {
 
     onItemTappedDeportes(context, index); // FUNCION BOTTOM_BAR
   }
+
+  String infoTitle1 = '';
+  String infoContent1 = '';
+  String infoTitle2 = '';
+  String infoContent2 = '';
+  String infoTitle3 = '';
+  String infoContent3 = '';
+  String infoTitle4 = '';
+  String infoContent4 = '';
+  String infoTitle5 = '';
+  String infoContent5 = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    await getInfoData('info_noticia1', (data) {
+      setState(() {
+        infoTitle1 = data['info_title'];
+        infoContent1 = data['info_content'];
+      });
+    });
+
+    await getInfoData('info_noticia2', (data) {
+      setState(() {
+        infoTitle2 = data['info_title'];
+        infoContent2 = data['info_content'];
+      });
+    });
+
+    await getInfoData('info_noticia3', (data) {
+      setState(() {
+        infoTitle3 = data['info_title'];
+        infoContent3 = data['info_content'];
+      });
+    });
+
+    await getInfoData('info_noticia4', (data) {
+      setState(() {
+        infoTitle4 = data['info_title'];
+        infoContent4 = data['info_content'];
+      });
+    });
+
+    await getInfoData('info_noticia5', (data) {
+      setState(() {
+        infoTitle5 = data['info_title'];
+        infoContent5 = data['info_content'];
+      });
+    });
+  }
+
+  Future<void> getInfoData(String infoName, Function(dynamic) callback) async {
+    final response = await http.get(Uri.parse('https://fitdeporregisterloginprueba11imginfo-dot-thinking-creek-385613.uc.r.appspot.com/info/$infoName'));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      callback(data);
+    } else {
+      // Error al obtener los datos
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,35 +159,93 @@ class _DeportesPages extends State<DeportesPages> {
             ),
 
 
-            Container(
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.5),
+
+    //PRIMERA NOTICIA
+    Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: Stack(
+        children: [
+          Container(
+            height: 200,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                  'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia1',
+                ),
+                fit: BoxFit.cover,
               ),
+            ),
+            foregroundDecoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Colors.black.withOpacity(0.8),
+                  Colors.transparent,
+                ],
+              ),
+            ),
+          ),
+          
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                infoTitle1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+
+
+    Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      height: 1.0,
+      color: Colors.black,
+    ),
+
+
+    //SEGUNDA NOTICIA
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Por la semifinal de ida, Real Madrid empató 1-1 con Manchester City',
+                      infoTitle2,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Image.network(
-                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia1',
-                    height: 200,
-                  ),
-                  SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'El Real Madrid empató 1-1 con el Manchester City este martes en la ida de semifinales de la Liga de Campeones en el Santiago Bernabéu dejando la eliminatoria abierta para la vuelta la próxima semana.',
+                      '',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -128,78 +257,65 @@ class _DeportesPages extends State<DeportesPages> {
             ),
 
 
+            SizedBox(width: 10),
 
 
-              Container(
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Victoria 3-0 del cuadro neroazurro en el Derby della Madonnina y clasificación a la sexta final de la Champions League',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Image.network(
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  child: Image.network(
                     'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia2',
-                    height: 200,
+                    fit: BoxFit.cover,
+                    height: 100,
                   ),
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Un Inter superior en los 180 minutos de la serie, se impuso esta vez 1 a 0 al Milan, con gol de su capitán Lautaro Martínez y asistencia de Romelu Lukaku.',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
+          ],
+        ),
+      ),
+    ),
+
+    Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      height: 1.0,
+      color: Colors.black,
+    ),
 
 
 
-            Container(
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.5),
-              ),
+    //TERCERA NOTICIA
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Alianza Lima vs. FBC Melgar: se definió al árbitro que dirigirá partido clave en Arequipa',
+                      infoTitle3,
                       style: TextStyle(
                         color: Colors.black,
-                        fontSize: 20,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Image.network(
-                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia3',
-                    height: 200,
-                  ),
-                  SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'FBC Melgar recibe a Alianza Lima este viernes 19 de mayo desde las 18:30 horas en el estadio de la UNSA. El cuadro victoriano es líder del Torneo Apertura con 8 puntos de diferencias con su más cercano perseguidor que es Universitario (28).',
+                      '',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -209,6 +325,157 @@ class _DeportesPages extends State<DeportesPages> {
                 ],
               ),
             ),
+            SizedBox(width: 10),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  child: Image.network(
+                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia3',
+                    fit: BoxFit.cover,
+                    height: 100,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+
+
+
+    Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      height: 1.0,
+      color: Colors.black,
+    ),
+
+
+    //CUARTA NOTICIA
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      infoTitle4,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  child: Image.network(
+                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia4',
+                    fit: BoxFit.cover,
+                    height: 100,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+
+        Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      height: 1.0,
+      color: Colors.black,
+    ),
+
+    //QUINTA NOTICIA
+    Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      infoTitle5,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  child: Image.network(
+                    'https://fitdeporregisterloginprueba11img-dot-thinking-creek-385613.uc.r.appspot.com/images/page_deportes_noticia5',
+                    fit: BoxFit.cover,
+                    height: 100,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+
+
 
           ],
         ),
