@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:fitdepor_app/view/components/drawer.dart';
 // import 'package:fitdepor_app/view/deportes_page.dart';
 import 'package:fitdepor_app/view/ejercicioAvanzado.dart';
@@ -6,7 +8,7 @@ import 'package:fitdepor_app/view/ejercicioPrincipiante.dart';
 // import 'package:fitdepor_app/view/nutricion_page.dart';
 import 'package:fitdepor_app/controller/bottom_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 
 void main () => runApp(HomePage());
 
@@ -48,6 +50,63 @@ class _MainPage extends State<MainPage> {
 
     onItemTappedPrincipal(context, index); // FUNCION BOTTOM_BAR
   }
+
+
+
+
+///////////////////LLAMAR API PARA EL CONTENIDO
+  String infoTitle1 = '';
+  String infoContent1 = '';
+  String infoTitle2 = '';
+  String infoContent2 = '';
+  String infoTitle3 = '';
+  String infoContent3 = '';
+
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    await getInfoData('info_ejercicio1', (data) {
+      setState(() {
+        infoTitle1 = data['info_title'];
+        infoContent1 = data['info_content'];
+      });
+    });
+
+    await getInfoData('info_ejercicio2', (data) {
+      setState(() {
+        infoTitle2 = data['info_title'];
+        infoContent2 = data['info_content'];
+      });
+    });
+
+    await getInfoData('info_ejercicio3', (data) {
+      setState(() {
+        infoTitle3 = data['info_title'];
+        infoContent3 = data['info_content'];
+      });
+    });
+
+
+  }
+
+  Future<void> getInfoData(String infoName, Function(dynamic) callback) async {
+    final response = await http.get(Uri.parse('https://fitdeporregisterloginprueba11imginfo-dot-thinking-creek-385613.uc.r.appspot.com/info/$infoName'));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      callback(data);
+    } else {
+      // Error al obtener los datos
+    }
+  }
+
+///////////////////////////////////////////////////////////////////
+
+
 
 
   @override
@@ -127,7 +186,7 @@ class _MainPage extends State<MainPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Nivel Principiante',
+                            infoTitle1,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
@@ -135,12 +194,15 @@ class _MainPage extends State<MainPage> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Text(
-                            'Este son unos ejercios ed nivel medio\n que te ayudaran a estar mejor \n fisicamente y mentalmente ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                            Container(
+                              width: 250, // Establece el ancho deseado para el texto
+                              child: Text(
+                                infoContent1,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
                           ),
                         ],
                       ),
@@ -224,7 +286,7 @@ class _MainPage extends State<MainPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Nivel Intermedio',
+                            infoTitle2,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
@@ -232,12 +294,15 @@ class _MainPage extends State<MainPage> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Text(
-                            'Este son unos ejercios ed nivel medio\n que te ayudaran a estar mejor \n fisicamente y mentalmente ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                            Container(
+                              width: 250, // Establece el ancho deseado para el texto
+                              child: Text(
+                                infoContent2,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
                           ),
                         ],
                       ),
@@ -320,7 +385,7 @@ class _MainPage extends State<MainPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Nivel Avanzado',
+                            infoTitle3,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
@@ -328,12 +393,15 @@ class _MainPage extends State<MainPage> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Text(
-                            'Este son unos ejercios ed nivel medio\n que te ayudaran a estar mejor \n fisicamente y mentalmente ',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                            Container(
+                              width: 250, // Establece el ancho deseado para el texto
+                              child: Text(
+                                infoContent3,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ),
                           ),
                         ],
                       ),

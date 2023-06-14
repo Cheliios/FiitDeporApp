@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 
+import 'home_page.dart';
+
 void main() {
   runApp(const SpecsPage());
 }
@@ -83,7 +85,12 @@ class SpecsPages extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
         },
         child: Icon(Icons.arrow_back),
         backgroundColor: Color.fromARGB(255, 175, 78, 78),
