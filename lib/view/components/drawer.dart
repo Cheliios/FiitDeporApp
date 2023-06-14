@@ -1,5 +1,7 @@
+import 'package:battery/battery.dart';
 import 'package:fitdepor_app/view/about_us.dart';
 import 'package:fitdepor_app/view/home_page.dart';
+import 'package:fitdepor_app/view/specs_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,16 +36,85 @@ class DrawerCustom extends StatefulWidget {
 class _DrawerCustom extends State<DrawerCustom> {
 
 
+
+/////////////////////BATERIA///////////////////////////
+@override
+void initState() {
+  super.initState();
+  _obtenerNivelBateria();
+}
+
+Battery _battery = Battery();
+String _batteryLevel = 'Desconocido';
+
+Future<void> _obtenerNivelBateria() async {
+  int batteryLevel = await _battery.batteryLevel;
+  setState(() {
+    _batteryLevel = batteryLevel.toString() + '%';
+  });
+}
+
+Icon getBatteryIcon() {
+  IconData batteryIcon;
+  Color batteryColor;
+
+  if (_batteryLevel.contains('%')) {
+    int level = int.parse(_batteryLevel.replaceAll('%', ''));
+    if (level >= 90) {
+      batteryIcon = Icons.battery_full;
+      batteryColor = Colors.green;
+    } else if (level >= 50) {
+      batteryIcon = Icons.battery_std;
+      batteryColor = Colors.yellow;
+    } else {
+      batteryIcon = Icons.battery_alert;
+      batteryColor = Colors.red;
+    }
+  } else {
+    batteryIcon = Icons.battery_unknown;
+    batteryColor = Colors.white;
+  }
+
+  return Icon(
+    batteryIcon,
+    color: batteryColor,
+  );
+}
+
   @override
   Widget build(BuildContext context) {
 
     String? userEmail = UserSingleton().getUserEmail(); // Obtener el correo electrónico del Singleton
     
     return Drawer(
-      child: Container(
-        color: Color.fromARGB(255, 70, 79, 99),
-        child: Column(
-          children: [
+    child: Container(
+      color: Color.fromARGB(255, 70, 79, 99),
+      child: Column(
+        children: [
+          Container(
+          color: Color.fromARGB(255, 39, 43, 51),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                SizedBox(width: 10),
+                Text(
+                  "Batería: $_batteryLevel",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                        getBatteryIcon(),
+              ],
+            ),
+          ),
+        ),
+
             Container(
               margin: EdgeInsets.fromLTRB(10, 40, 0, 0),
               child: Row(
@@ -179,6 +250,34 @@ class _DrawerCustom extends State<DrawerCustom> {
                           ],
                         );
                       });
+                },
+              ),
+            ),
+            Container(
+              child: ListTile(
+                title: Text(
+                  "Caracteristicas",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                leading: Icon(
+                  Icons.settings_applications_outlined,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration(milliseconds: 500),
+                      pageBuilder: (context, animation, secondaryAnimation) => SpecsPages(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
                 },
               ),
             ),
