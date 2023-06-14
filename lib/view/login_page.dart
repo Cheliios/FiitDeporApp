@@ -52,7 +52,7 @@ class _LoginPages extends State<LoginPages> {
       
       appBar: AppBar(
         title: Text('Inicio de Sesión'),
-        backgroundColor: Color.fromARGB(255, 94, 175, 78),
+        backgroundColor: Color.fromARGB(255, 175, 78, 78),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -174,16 +174,6 @@ class _LoginPages extends State<LoginPages> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Lógica para cerrar la aplicación
-          Navigator.pop(context);
-        },
-        backgroundColor: Color.fromARGB(
-            255, 175, 78, 78), // Cambia aquí el color del botón flotante
-        child: Icon(Icons.exit_to_app),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

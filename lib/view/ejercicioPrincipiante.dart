@@ -1,3 +1,4 @@
+import 'package:fitdepor_app/view/home_page.dart';
 import 'package:flutter/material.dart';
 
 import 'components/drawer.dart';
@@ -34,15 +35,6 @@ class PrincipianteScreen extends StatefulWidget {
 
 class _PrincipianteScreen extends State<PrincipianteScreen> {
 
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    onItemTappedPrincipal(context, index); // FUNCION BOTTOM_BAR
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -361,43 +353,19 @@ class _PrincipianteScreen extends State<PrincipianteScreen> {
 
           ],
         ),
-
-
-
-
-
-
-
-
-
-        //BARRA DE NAVEGACION INFERIOR
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 19, 19, 19),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Ejercicio',
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper),
-              label: 'Deportes',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.food_bank),
-              label: 'Nutricion',
-            ),
-          ],
-
-          currentIndex: _selectedIndex,
-          selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-          onTap: _onItemTapped,
-          unselectedItemColor: Color.fromARGB(150, 255, 255, 255),
-          selectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
+          );
+        },
+        child: Icon(Icons.arrow_back),
+        backgroundColor: Color.fromARGB(255, 175, 78, 78),
       ),
-
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       
     );
   }

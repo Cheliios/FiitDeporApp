@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../controller/bottom_bar.dart';
 import 'components/drawer.dart';
 import 'deportes_page.dart';
+import 'home_page.dart';
 import 'nutricion_page.dart';
 
 void main() {
@@ -34,15 +35,6 @@ class IntermedioScreen extends StatefulWidget {
 
 class _IntermedioScreen extends State<IntermedioScreen> {
   
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    onItemTappedPrincipal(context, index); // FUNCION BOTTOM_BAR
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -361,43 +353,20 @@ class _IntermedioScreen extends State<IntermedioScreen> {
 
           ],
         ),
-
-
-
-
-
-
-
-
-
-
-        //BARRA DE NAVEGACION INFERIOR
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 19, 19, 19),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Ejercicio',
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.newspaper),
-              label: 'Deportes',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.food_bank),
-              label: 'Nutricion',
-            ),
-          ],
-
-          currentIndex: _selectedIndex,
-          selectedItemColor: Color.fromARGB(255, 255, 255, 255),
-          onTap: _onItemTapped,
-          unselectedItemColor: Color.fromARGB(150, 255, 255, 255),
-          selectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
+          );
+        },
+        child: Icon(Icons.arrow_back),
+        backgroundColor: Color.fromARGB(255, 175, 78, 78),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
 
 
     );
